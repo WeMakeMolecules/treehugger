@@ -5,7 +5,7 @@
 #the GENOMES.Ids file must be in /fungison/bin/
 
 use strict;
-use warnings;
+#use warnings;
 use Getopt::Long qw(GetOptions);
 
 
