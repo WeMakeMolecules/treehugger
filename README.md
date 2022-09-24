@@ -13,9 +13,13 @@ Just download the script and place it in the same folder fungison.pl and the /bi
 ## trimal<br />
       wget https://github.com/inab/trimal/archive/refs/heads/trimAl.zip
       unzip trimAl.zip
-      cd trimAl
-      cd source
+      cd trimal-trimAl/source
       make
+      sudo mv trimal /usr/bin
+      cd ..
+      cd ..
+      rm -r trimal-trimAl
+      rm trimAl.zip
 ## iqtree<br />
       sudo apt install muscle
 
