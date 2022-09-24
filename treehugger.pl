@@ -84,7 +84,7 @@ GetOptions(
 		@blastouts= `blastp -query $query.query -db $_ -evalue $evalue -outfmt 6`;
 		foreach (@blastouts){
 			@columns=split(/\s+/,$_);
-			if ($columns[11]=> $score){
+			if ($columns[11] >= $score){
 				$entry="$columns[1]";
 				$entry=~s/fig://;
 				print OUT "$entry\n";
