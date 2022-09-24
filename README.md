@@ -36,6 +36,7 @@ OPTIONS:\n
 -t yes/no		|TRIMS THE HIT SEQUENCES WITH MUSCLE, [yes/no]
 -p yes/no		|CALCULATES A PHYLOGENETIC TREE [yes/no]
 
-Example:
+Examples:
 perl treehugger.pl  -q gluc.query  -e 0.00001 -s 100 -x no -a yes -t yes -p yes
+perl treehugger.pl  -q gluc.query  -e 0.00001 -s 100 -x FORMATDB -a yes -t yes -p yes
 ```
