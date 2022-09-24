@@ -6,20 +6,18 @@ it runs along with fungison.pl using the same database
 Just download the script and place it in the same folder fungison.pl and the /bin directory  <br /><br />
 
 # Dependencies:
-blast+<br />
-      `sudo apt install blast+`<br />
-muscle<br />
-      `sudo apt install muscle`<br />
-trimal<br />
-```
-wget https://github.com/inab/trimal/archive/refs/heads/trimAl.zip
-unzip trimAl.zip
-cd trimAl
-cd source
-make
-iqtree
-sudo apt install muscle
-```
+## blast+<br />
+      sudo apt install blast+
+## muscle<br />
+      sudo apt install muscle
+## trimal<br />
+      wget https://github.com/inab/trimal/archive/refs/heads/trimAl.zip
+      unzip trimAl.zip
+      cd trimAl
+      cd source
+      make
+## iqtree<br />
+      sudo apt install muscle
 
 The /bin/GENOMES folder is requiered <br />
 The /bin/GENOMES.IDs file should be available <br />
