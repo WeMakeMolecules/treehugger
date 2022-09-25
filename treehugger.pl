@@ -87,7 +87,6 @@ GetOptions(
 				$entry="$columns[1]";
 				#$entry=~s/fig://;
 				print OUT "$entry\n";
-				print "$entry\n";
 			}
 		}
 	}
@@ -208,5 +207,4 @@ system "mv *.aln ./$query\_Treehugger_results";
 system "mv *.fasta ./$query\_Treehugger_results";
 system "mv *.log ./$query\_Treehugger_results";
 print "\nAll outputs are in the $query\_Treehugger_results folder\n";
-
 print "All done, have a great day\n\n";
