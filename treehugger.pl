@@ -8,7 +8,6 @@ use strict;
 use warnings;
 use Getopt::Long qw(GetOptions);
 
-
 print "USAGE: perl treehugger.pl <OPTIONS>\n\n";
 print "OPTIONS:\n\n";
 print "-q FILE.query   	|QUERY FILE, [a file with .query extension}\n";
@@ -73,9 +72,9 @@ GetOptions(
 	}
 	
 	#blasting on the database
-	#print "The blast search will be performed with evalue $evalue and score cutoff of $score\n";
+	print "The blast search will be performed with evalue $evalue and score cutoff of $score\n";
 	$query=~s/\.query//;
-	#open OUT, ">$query.hitlist";
+	open OUT, ">$query.hitlist";
 	@fastas=qx'ls ./bin/GENOMES/*.faa';
 	foreach (@fastas){
 		chomp $_;
@@ -89,7 +88,6 @@ GetOptions(
 				#$entry=~s/fig://;
 				print OUT "$entry\n";
 				print "$entry\n";
-
 			}
 		}
 	}
