@@ -8,6 +8,7 @@ use strict;
 use warnings;
 use Getopt::Long qw(GetOptions);
 
+
 print "USAGE: perl treehugger.pl <OPTIONS>\n\n";
 print "OPTIONS:\n\n";
 print "-q FILE.query   	|QUERY FILE, [a file with .query extension}\n";
@@ -70,7 +71,8 @@ GetOptions(
 	else {
 	die "Missing argument -x n or -x FORMATDB [FORMAT THE DATABASE SELECTED WITH THE -d OPTION, 'no' or 'FORMATDB]\n\n";
 	}
-	
+
+
 	#blasting on the database
 	print "The blast search will be performed with evalue $evalue and score cutoff of $score\n";
 	$query=~s/\.query//;
@@ -85,7 +87,7 @@ GetOptions(
 			@columns=split(/\s+/,$_);
 			if ($columns[11] >= "$score"){
 				$entry="$columns[1]";
-				#$entry=~s/fig://;
+				$entry=~s/fig://;
 				print OUT "$entry\n";
 			}
 		}
@@ -97,7 +99,7 @@ GetOptions(
 	foreach(@fastas){
 		chomp $_;
 		$dbname= "$_";
-		system "blastdbcmd -db $dbname -dbtype prot -entry_batch $query.uniq  -logfile blastdbcmd.log >> $query.txt";
+		system "blastdbcmd -db $dbname -dbtype prot -entry_batch $query.uniq -logfile blastdbcmd.log >> $query.txt";
 	}
 
 	open FASTA, ">$query.fasta";
