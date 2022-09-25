@@ -71,23 +71,25 @@ GetOptions(
 	else {
 	die "Missing argument -x n or -x FORMATDB [FORMAT THE DATABASE SELECTED WITH THE -d OPTION, 'no' or 'FORMATDB]\n\n";
 	}
-
-
+	
 	#blasting on the database
-	print "The blast search will be performed with evalue $evalue and score cutoff of $score\n";
+	#print "The blast search will be performed with evalue $evalue and score cutoff of $score\n";
 	$query=~s/\.query//;
-	open OUT, ">$query.hitlist";
+	#open OUT, ">$query.hitlist";
 	@fastas=qx'ls ./bin/GENOMES/*.faa';
 	foreach (@fastas){
 		chomp $_;
 		$dbname= "$_";
 		@blastouts= `blastp -query $query.query -db $_ -evalue $evalue -outfmt 6`;
 		foreach (@blastouts){
+
 			@columns=split(/\s+/,$_);
-			if ($columns[11] >= $score){
+			if ($columns[11] >= "$score"){
 				$entry="$columns[1]";
-				$entry=~s/fig://;
+				#$entry=~s/fig://;
 				print OUT "$entry\n";
+				print "$entry\n";
+
 			}
 		}
 	}
@@ -98,7 +100,7 @@ GetOptions(
 	foreach(@fastas){
 		chomp $_;
 		$dbname= "$_";
-		system "blastdbcmd -db $dbname -dbtype prot -entry_batch $query.uniq -out $query.txt -logfile blastdbcmd.log";
+		system "blastdbcmd -db $dbname -dbtype prot -entry_batch $query.uniq  -logfile blastdbcmd.log >> $query.txt";
 	}
 
 	open FASTA, ">$query.fasta";
@@ -198,8 +200,6 @@ print "\nfound $hits hit sequences, they are in the $query.fasta file\n\n";
 		die "Missing argument -p yes/no [yes or no]\n\n";
 	}
 
-
-
 system "rm *.hitlist blastdbcmd.log";
 system "rm *.uniq *.perf  $query.txt";
 system "rm *.bionj *.ckp.gz *.iqtree *.mldist *.model.gz *.splits.nex *.treefile";
@@ -212,6 +212,3 @@ system "mv *.log ./$query\_Treehugger_results";
 print "\nAll outputs are in the $query\_Treehugger_results folder\n";
 
 print "All done, have a great day\n\n";
-
-
-
