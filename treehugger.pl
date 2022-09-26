@@ -69,7 +69,7 @@ GetOptions(
 	print "\nYou selected the current database, no DB formatting is requiered\n";
 	}
 	else {
-	die "Missing argument -x n or -x FORMATDB [FORMAT THE DATABASE SELECTED WITH THE -d OPTION, 'no' or 'FORMATDB]\n\n";
+	die "Missing argument -x no or -x FORMATDB [recomended option is 'no', FORMATDB FORMATS THE DATABASE]\n\n";
 	}
 
 
