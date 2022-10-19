@@ -1,4 +1,4 @@
-#Created by Pablo Cruz-Morales, sept 2022
+#Created by Pablo Cruz-Morales, oct 2022
 #A pipeline to grab, label, align and trim sets of homologous proteins using a query and calculate a phylogeny 
 #it runs along with fungison.pl using the same database
 #the genomes database must be in /fungison/bin/genomes
@@ -14,8 +14,9 @@ print "OPTIONS:\n\n";
 print "-q FILE.query   	|QUERY FILE, [a file with .query extension}\n";
 print "-e 0.0000001		|E-VALUE CUTOFF, [a number]\n";
 print "-s 200	        	|BIT-SCORE CUTOFF [a number]\n";
-print "-x n or -F FORMATDB	|FORMAT THE DATABASE  ['no' is the recommeded option or 'FORMATDB']\n";
+print "-x no or -F FORMATDB	|FORMAT THE DATABASE  ['no' is the recommeded option or 'FORMATDB']\n";
 print "-a yes/no		|ALIGNS THE HIT SEQUENCES WITH MUSCLE, [yes/no]\n";
+print "-m mafft/muscle		|SELECTS ALIGNER [mafft/muscle]\n\n";
 print "-t yes/no		|TRIMS THE HIT SEQUENCES WITH MUSCLE, [yes/no]\n";
 print "-p yes/no		|CALCULATES A PHYLOGENETIC TREE [yes/no]\n\n";
 
@@ -23,6 +24,7 @@ my $query; my $evalue; my $score; my $database;
 my $formatting; my @fastas; my $cont; my $dbname; my @blastouts;
 my @columns; my $entry; my $line; my $original; my $genomename;
 my $names; my $peg; my $id; my $hits; my $alignment; my $trimming; my $phylogeny;
+my $aligner;
 
 GetOptions(
 'q=s' => \$query,
@@ -32,6 +34,8 @@ GetOptions(
 'a=s' => \$alignment,
 't=s' => \$trimming,
 'p=s' => \$phylogeny,
+'m=s' => \$aligner,
+
 
 ) or die "Missing parameters\n";
 
@@ -69,7 +73,7 @@ GetOptions(
 	print "\nYou selected the current database, no DB formatting is requiered\n";
 	}
 	else {
-	die "Missing argument -x no or -x FORMATDB [recomended option is 'no', FORMATDB FORMATS THE DATABASE]\n\n";
+	die "Missing argument -x no or -x FORMATDB [FORMAT THE DATABASE SELECTED WITH THE -d OPTION, 'no' or 'FORMATDB]\n\n";
 	}
 
 
@@ -146,9 +150,16 @@ print "\nfound $hits hit sequences, they are in the $query.fasta file\n\n";
 #aligning
 	if ($alignment) {
 		if ($alignment=~/yes/) {
-			print "Aligning the sequences in $query.fasta\n";
+			if ($aligner=~/muscle/){
 			system "muscle -in $query.fasta -out $query.aln -quiet";
+			print "Aligning the sequences in $query.fasta with muscle\n";
+			print "The alignments are in $query.aln\n";				
+			}
+			elsif ($aligner=~/mafft/){
+			system "mafft $query.fasta > $query.aln";
+			print "Aligning the sequences in $query.fasta with MAFFT\n";
 			print "The alignments are in $query.aln\n";
+			}
 		}
 		if ($alignment=~/no/) {
 			print "You selected not aligning the sequences\n";
@@ -160,6 +171,7 @@ print "\nfound $hits hit sequences, they are in the $query.fasta file\n\n";
 		print "All done, have a great day\n";
 		die "Missing argument -a yes/no [yes or no]\n\n";
 	}
+
 
 #trimming
 #trimal is needed, get it here: https://github.com/inab/trimal
@@ -199,14 +211,16 @@ print "\nfound $hits hit sequences, they are in the $query.fasta file\n\n";
 		die "Missing argument -p yes/no [yes or no]\n\n";
 	}
 
-system "rm *.hitlist blastdbcmd.log";
-system "rm *.uniq *.perf  $query.txt";
-system "rm *.bionj *.ckp.gz *.iqtree *.mldist *.model.gz *.splits.nex *.treefile";
+
+
+system "rm $query.hitlist blastdbcmd.log";
+system "rm $query.uniq $query.perf  $query.txt";
+system "rm $query*.bionj $query*.ckp.gz $query*.iqtree $query*.mldist $query*.model.gz $query*.splits.nex $query*.treefile";
 system "mkdir $query\_Treehugger_results";
-system "mv *.contree ./$query\_Treehugger_results";
-system "mv *.trimmed ./$query\_Treehugger_results";
-system "mv *.aln ./$query\_Treehugger_results";
-system "mv *.fasta ./$query\_Treehugger_results";
-system "mv *.log ./$query\_Treehugger_results";
+system "mv $query*.contree ./$query\_Treehugger_results";
+system "mv $query*.trimmed ./$query\_Treehugger_results";
+system "mv $query*.aln ./$query\_Treehugger_results";
+system "mv $query*.fasta ./$query\_Treehugger_results";
+system "mv $query*.log ./$query\_Treehugger_results";
 print "\nAll outputs are in the $query\_Treehugger_results folder\n";
 print "All done, have a great day\n\n";
