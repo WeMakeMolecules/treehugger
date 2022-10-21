@@ -34,7 +34,7 @@ OPTIONS:\n
 -e 0.0000001		|E-VALUE CUTOFF, [a number]
 -s 200	        	|BIT-SCORE CUTOFF [a number]
 -x n or -F FORMATDB	|FORMAT THE DATABASE  ['no' is the recommeded option or 'FORMATDB']
--a yes/no		|ALIGNS THE HIT SEQUENCES WITH MUSCLE, [yes/no]
+-a yes/no		|ALIGNS THE HIT SEQUENCES, [yes/no]
 -t yes/no		|TRIMS THE HIT SEQUENCES WITH MUSCLE, [yes/no]
 -p yes/no		|CALCULATES A PHYLOGENETIC TREE [yes/no]
 
