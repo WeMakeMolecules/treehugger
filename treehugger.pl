@@ -14,9 +14,9 @@ print "OPTIONS:\n\n";
 print "-q FILE.query   	|QUERY FILE, [a file with .query extension}\n";
 print "-e 0.0000001		|E-VALUE CUTOFF, [a number]\n";
 print "-s 200	        	|BIT-SCORE CUTOFF [a number]\n";
-print "-x no or -F FORMATDB	|FORMAT THE DATABASE  ['no' is the recommeded option or 'FORMATDB']\n";
-print "-a yes/no		|ALIGNS THE HIT SEQUENCES WITH MUSCLE, [yes/no]\n";
-print "-m mafft/muscle		|SELECTS ALIGNER [mafft/muscle]\n\n";
+print "-x no or -x FORMATDB	|FORMAT THE DATABASE  ['no' is the recommeded option or 'FORMATDB']\n";
+print "-a yes/no		|ALIGNS THE HIT SEQUENCES, [yes/no]\n";
+print "-m mafft/muscle		|SELECTS ALIGNER [mafft/muscle]\n";
 print "-t yes/no		|TRIMS THE HIT SEQUENCES WITH MUSCLE, [yes/no]\n";
 print "-p yes/no		|CALCULATES A PHYLOGENETIC TREE [yes/no]\n\n";
 
