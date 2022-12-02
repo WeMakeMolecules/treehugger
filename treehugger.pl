@@ -91,7 +91,8 @@ GetOptions(
 			@columns=split(/\s+/,$_);
 			if ($columns[11] >= "$score"){
 				$entry="$columns[1]";
-				$entry=~s/fig://;
+				#COMMENT/UNCOMMENT THIS LINE IF BLASTDBCMD IS NOT RETRIEVING ANYTHING
+				#$entry=~s/fig://;
 				print OUT "$entry\n";
 			}
 		}
