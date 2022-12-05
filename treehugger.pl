@@ -198,7 +198,7 @@ print "\nfound $hits hit sequences, they are in the $query.fasta file\n\n";
 	if ($phylogeny) {
 		if ($phylogeny=~/yes/) {
 			print "A phylogenetic tree will be constructed using $query.trimed\n";
-			system "iqtree -s $query.trimmed -m TEST -alrt 10000 -bb 10000 -quiet";
+			system "iqtree2 -s $query.trimmed -m TEST -alrt 10000 -bb 10000 -quiet";
 			print "The phylogenetic tree is in $query.trimmed.contre\n";
 		}
 		if ($phylogeny=~/no/) {
