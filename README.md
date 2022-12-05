@@ -21,7 +21,7 @@ Just download the script and place it in the same folder fungison.pl and the /bi
       rm -r trimal-trimAl
       rm trimAl.zip
 ## iqtree<br />
-      sudo apt install muscle
+      sudo apt install iqtree
 
 The /bin/GENOMES folder is requiered <br />
 The /bin/GENOMES.IDs file should be available <br />
